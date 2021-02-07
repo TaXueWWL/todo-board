@@ -39,7 +39,7 @@ public class TodoEntity {
     /**
      * 完成
      */
-    public void todoDone() {
+    public void done() {
         this.done = true;
     }
 

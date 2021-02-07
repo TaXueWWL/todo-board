@@ -2,13 +2,17 @@
 > 我们要编写一个待办事项管理的软件，你可以看我下面给出的需求，
 >它是以命令行应用的方式存在的。
 # 第一阶段：基本功能
+
+todo  异步刷盘
+初始化加载文件
+
 ## 1.添加 Todo 项
 
     todo add <item>    
     
     1. <item>
     
-    Item <itemIndex> added
+    Item <itemIndex> added 
     
 ## 2. 完成 Todo 项
     

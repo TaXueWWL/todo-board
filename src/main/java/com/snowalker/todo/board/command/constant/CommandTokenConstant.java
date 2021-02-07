@@ -11,6 +11,8 @@ public abstract class CommandTokenConstant {
 
     private CommandTokenConstant() {}
 
+    public static final String TODO = "todo";
+
     public static final String ADD = "add";
 
     public static final String DONE = "done";

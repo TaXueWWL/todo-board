@@ -53,14 +53,20 @@ public class TodoContext {
         return lastTodo;
     }
 
-    private String checkUser(String user) {
+    public String checkUser(String user) {
         if (StringUtils.isBlank(user)) {
             user = SessionContext.DEFAULT_USER_NAME;
         }
         return user;
     }
 
-    private List<TodoEntity> chooseTodoListByUser(String user) {
+    /**
+     * 获取某个用户的todo列表
+     * @param user
+     * @return
+     */
+    public List<TodoEntity> chooseTodoListByUser(String user) {
+        user = checkUser(user);
         List<TodoEntity> todoEntities = todoMap.get(user);
         if (todoEntities == null) {
             todoEntities = new ArrayList<>();

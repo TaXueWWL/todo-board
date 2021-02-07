@@ -75,6 +75,12 @@ public class CommandInputHandler {
             return;
         }
 
+        String cmdStartToken = commandTokenList.get(0);
+        if (!cmdStartToken.equalsIgnoreCase(CommandTokenConstant.TODO)) {
+            Logger.warning( "Current input command \"" + originCommand + "\" not supported! Input [help] to see supported commands.");
+            return;
+        }
+
         // 根据第二个token进行命令分流
         String cmdKeyword = commandTokenList.get(1);
         // 获取其余参数
