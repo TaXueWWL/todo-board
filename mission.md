@@ -6,7 +6,7 @@
 todo  异步刷盘
 初始化加载文件
 
-## 1.添加 Todo 项
+## (√)1.添加 Todo 项 
 
     todo add <item>    
     
@@ -14,7 +14,7 @@ todo  异步刷盘
     
     Item <itemIndex> added 
     
-## 2. 完成 Todo 项
+## (√)2. 完成 Todo 项
     
     todo done <itemIndex>
         

@@ -19,6 +19,8 @@ public abstract class CommandTokenConstant {
 
     public static final String LIST = "list";
 
+    public static final String LIST_ALL = "--all";
+
     public static final String LOGIN = "login";
 
     public static final String LOGOUT ="logout";
