@@ -1,32 +1,43 @@
 package com.snowalker.todo.board;
 
+import com.alibaba.fastjson.JSON;
+import com.snowalker.todo.board.command.constant.CommandTokenConstant;
+import com.snowalker.todo.board.entity.TodoContext;
 import com.snowalker.todo.board.handler.CommandInputHandler;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
 
-    public static void main(String[] args) {
-        Logger.printBanner("================== Welcome to use [todo board] ======================");
+    public static void main(String[] args) throws Exception {
 
         Scanner scanner = new Scanner(System.in);
         CommandInputHandler commandInputHandler = new CommandInputHandler(scanner);
 
-        // 首次输出一次提示
+        // 输出提示
+        Logger.printBanner("================== Welcome to use [todo board] ======================");
         commandInputHandler.printHelpMenu();
+
         while (true) {
-            Logger.printBanner("====================================================================");
-            Logger.printTips(">>> ");
+            Logger.printBanner("=====================================================================");
 
             // 接收命令并解析执行
+            Logger.printTips(">>> ");
             String originCommand = commandInputHandler.nextCommand();
-            commandInputHandler.parseCommand(originCommand);
-
-            if (StringUtils.isBlank(originCommand) || originCommand.equals("exit")) {
+            if (StringUtils.isBlank(originCommand) || originCommand.equals(CommandTokenConstant.EXIT)) {
                 System.out.println(">>> " + "exit！");
                 break;
             }
+
+            // todo 清屏
+            if (originCommand.equalsIgnoreCase(CommandTokenConstant.CLEAR)) {
+            }
+
+            // 具体处理逻辑
+            commandInputHandler.parseCommand(originCommand);
+            Logger.debug(JSON.toJSONString(TodoContext.getTodoMap()));
         }
     }
 

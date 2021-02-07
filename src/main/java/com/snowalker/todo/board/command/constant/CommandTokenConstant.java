@@ -28,4 +28,8 @@ public abstract class CommandTokenConstant {
     public static final String INIT = "init";
 
     public static final String HELP = "help";
+
+    public static final String EXIT = "exit";
+
+    public static final String CLEAR = "clear";
 }

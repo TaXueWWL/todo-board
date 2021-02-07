@@ -15,18 +15,32 @@ public class TodoEntity {
     private String content;
     /**是否为最后一个，默认false*/
     private boolean last = false;
+    /**是否完成，默认false 未完成*/
+    private boolean done = false;
 
     public TodoEntity() {
     }
 
     public TodoEntity(int index, String content, boolean last) {
+        this(index, content, last, false);
+    }
+
+    public TodoEntity(int index, String content, boolean last, boolean done) {
         this.index = index;
         this.content = content;
         this.last = last;
+        this.done = done;
     }
 
     public static TodoEntity newInstance() {
         return new TodoEntity();
+    }
+
+    /**
+     * 完成
+     */
+    public void todoDone() {
+        this.done = true;
     }
 
     public int getIndex() {
@@ -55,8 +69,22 @@ public class TodoEntity {
         this.last = true;
     }
 
+
+    public void setNotLast() {
+        this.last = false;
+    }
+
     public TodoEntity setLast(boolean last) {
         this.last = last;
+        return this;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public TodoEntity setDone(boolean done) {
+        this.done = done;
         return this;
     }
 }

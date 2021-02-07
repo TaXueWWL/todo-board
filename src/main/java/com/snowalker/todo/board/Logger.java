@@ -9,7 +9,11 @@ package com.snowalker.todo.board;
  */
 public class Logger {
 
-    public static final String WARNING = "[warning] ";
+    private static final String WARNING = "[warning] ";
+
+    private static final String DEBUG = "[debug] ";
+
+    private static final String INFO = "[info] ";
 
     public static void printBanner(String s) {
         System.out.println(s);
@@ -21,5 +25,13 @@ public class Logger {
 
     public static void warning(String s) {
         System.out.println(WARNING + s);
+    }
+
+    public static void debug(String s) {
+        System.out.println(DEBUG + s);
+    }
+
+    public static void info(String s) {
+        System.out.println(INFO + s);
     }
 }

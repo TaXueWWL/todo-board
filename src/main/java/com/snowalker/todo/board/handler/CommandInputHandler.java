@@ -86,7 +86,6 @@ public class CommandInputHandler {
     }
 
     private void dispatch(String keyword, List<String> extraParams) {
-        Logger.warning("command: " + keyword + ", extraParams: " + JSON.toJSONString(extraParams));
         CommandExecutorAdaptor commandExecutorAdaptor = new CommandExecutorAdaptor();
         if (!commandExecutorAdaptor.cmdExists(keyword)) {
             Logger.warning( "Current input command \"" + keyword + "\" not supported! Input [help] to see supported commands.");
@@ -96,6 +95,9 @@ public class CommandInputHandler {
         commandExecutorAdaptor.execute(keyword, "", extraParams);
     }
 
+    /**
+     * 打印帮助菜单
+     */
     public void printHelpMenu() {
         COMMAND_HELP_MENU.stream().forEach(menu -> {
             System.out.println(menu);
@@ -103,8 +105,9 @@ public class CommandInputHandler {
     }
 
     private List<String> extraParams(List<String> commandTokenList) {
+        // 每次清理之后 下一个都会变成第一个，因此只需要从头清除就可以
         commandTokenList.remove(0);
-        commandTokenList.remove(1);
+        commandTokenList.remove(0);
         return Lists.newArrayList(commandTokenList);
     }
 }

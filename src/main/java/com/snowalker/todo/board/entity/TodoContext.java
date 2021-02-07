@@ -29,6 +29,8 @@ public class TodoContext {
         List<TodoEntity> todoEntityList = chooseTodoListByUser(user);
         synchronized (todoMap) {
             todoEntityList.add(todoEntity);
+            // 刷新上下文
+            todoMap.put(user, todoEntityList);
         }
     }
 
@@ -53,7 +55,7 @@ public class TodoContext {
 
     private String checkUser(String user) {
         if (StringUtils.isBlank(user)) {
-            user = "default";
+            user = SessionContext.DEFAULT_USER_NAME;
         }
         return user;
     }
@@ -66,4 +68,7 @@ public class TodoContext {
         return todoEntities;
     }
 
+    public static Map<String, List<TodoEntity>> getTodoMap() {
+        return todoMap;
+    }
 }
