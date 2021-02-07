@@ -21,7 +21,7 @@ public class App {
         commandInputHandler.printHelpMenu();
 
         while (true) {
-            Logger.printBanner("=====================================================================");
+            Logger.printBanner("");
 
             // 接收命令并解析执行
             Logger.printTips(">>> ");
