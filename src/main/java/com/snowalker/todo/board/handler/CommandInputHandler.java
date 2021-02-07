@@ -41,6 +41,7 @@ public class CommandInputHandler {
         COMMAND_HELP_MENU.add("* Todo 列表导出                                todo export > todolist *");
         COMMAND_HELP_MENU.add("* Todo 列表导入                                todo import -f todolist*");
         COMMAND_HELP_MENU.add("* 初始化数据库                                 todo init              *");
+        COMMAND_HELP_MENU.add("* 退出命令行                                   exit                   *");
         COMMAND_HELP_MENU.add("");
     }
 

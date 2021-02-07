@@ -27,7 +27,7 @@ public class App {
             Logger.printTips(">>> ");
             String originCommand = commandInputHandler.nextCommand();
             if (StringUtils.isBlank(originCommand) || originCommand.equals(CommandTokenConstant.EXIT)) {
-                System.out.println(">>> " + "exit！");
+                System.out.println("exit!");
                 break;
             }
 
