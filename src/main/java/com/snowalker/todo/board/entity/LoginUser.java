@@ -1,6 +1,6 @@
 package com.snowalker.todo.board.entity;
 
-import com.snowalker.todo.board.Logger;
+import com.snowalker.todo.board.logger.Logger;
 import com.snowalker.todo.board.exception.TodoRuntimeException;
 
 /**

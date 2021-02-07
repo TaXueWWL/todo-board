@@ -1,10 +1,9 @@
 package com.snowalker.todo.board.entity;
 
 import com.google.common.collect.Maps;
-import com.snowalker.todo.board.Logger;
+import com.snowalker.todo.board.logger.Logger;
 import com.snowalker.todo.board.exception.TodoRuntimeException;
 import org.apache.commons.lang3.StringUtils;
-import sun.rmi.runtime.Log;
 
 import java.util.Map;
 

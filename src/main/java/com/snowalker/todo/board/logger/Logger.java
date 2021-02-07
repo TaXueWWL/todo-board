@@ -1,4 +1,4 @@
-package com.snowalker.todo.board;
+package com.snowalker.todo.board.logger;
 
 /**
  * @author snowalker

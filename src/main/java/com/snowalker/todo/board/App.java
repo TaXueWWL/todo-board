@@ -4,9 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.snowalker.todo.board.command.constant.CommandTokenConstant;
 import com.snowalker.todo.board.entity.TodoContext;
 import com.snowalker.todo.board.handler.CommandInputHandler;
+import com.snowalker.todo.board.logger.Logger;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
