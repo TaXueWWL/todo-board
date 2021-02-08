@@ -196,7 +196,6 @@ public class FileRepository implements IRepository<TodoEntity> {
 
         // 取出全局行号，找到该行 进行替换操作，重新写回文件
         int globalIndex = todoEntity.getGlobalIndex();
-        Logger.debug("update:" + JSON.toJSONString(todoEntity));
         List<String> fileContentList = new ArrayList<>();
 
         LineNumberReader lineNumberReader = null;
@@ -206,7 +205,6 @@ public class FileRepository implements IRepository<TodoEntity> {
 
             String line = null;
             while ((line = lineNumberReader.readLine()) != null) {
-                System.out.println("Line " + lineNumberReader.getLineNumber() +  ": " + line);
                 if (lineNumberReader.getLineNumber() == globalIndex) {
                     // 目标行，替换该行拼并写入
                     String newLine = todoEntity.serialize2FileContent();
