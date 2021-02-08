@@ -5,8 +5,11 @@ import com.snowalker.todo.board.handler.command.constant.CommandTokenConstant;
 import com.snowalker.todo.board.handler.command.impl.*;
 import com.snowalker.todo.board.domain.TodoContext;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author snowalker
@@ -47,7 +50,23 @@ public class CommandExecutorAdaptor {
     }
 
     public void execute(String commandType, String user, Object extra) {
-        COMMAND_EXECUTOR_CONTEXT.get(commandType).execute(user, extra);
+        CountDownLatch countDownLatch = null;
+        if (needCountDownLatch(commandType)) {
+            countDownLatch = new CountDownLatch(1);
+            COMMAND_EXECUTOR_CONTEXT.get(commandType).execute(user, extra, countDownLatch);
+            try {
+                countDownLatch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            COMMAND_EXECUTOR_CONTEXT.get(commandType).execute(user, extra, countDownLatch);
+        }
     }
 
+    public boolean needCountDownLatch(String cmdKeyword) {
+        List<String> cmdWhiteList = new ArrayList<>();
+        cmdWhiteList.add(CommandTokenConstant.ADD);
+        return cmdWhiteList.contains(cmdKeyword);
+    }
 }

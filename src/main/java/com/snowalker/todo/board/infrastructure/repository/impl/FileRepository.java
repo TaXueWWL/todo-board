@@ -26,9 +26,7 @@ import java.util.Map;
 public class FileRepository implements IRepository<TodoEntity> {
 
     /**行号分隔符，通过.区分行号与后面的内容*/
-    private static final String LINE_SEPARATOR = "$";
-
-    private TodoContext todoContext = TodoContext.getInstance();
+    private static final String LINE_SEPARATOR = ".";
 
     private String absoluteTodoFilePath = ConfigReader.getInstance().getConfig("repository.file.root_path") +
             ConfigReader.getInstance().getConfig("repository.file.name");
@@ -50,7 +48,8 @@ public class FileRepository implements IRepository<TodoEntity> {
             File loadFile = fileHandler.loadFile(absoluteTodoFilePath);
             // 按行读
             List<String> todoFileList = readFileByLine(loadFile);
-            System.out.println(JSON.toJSONString(todoFileList));
+            // todo delete this
+            Logger.debug(todoFileList.toString());
             // 转换为todoEntity加载到内存中
             transfer(todoFileList);
         } catch (Exception e) {
@@ -66,9 +65,19 @@ public class FileRepository implements IRepository<TodoEntity> {
      * @return
      */
     public Pair<String, String> splitLine(String line) {
-        String[] splitArray = line.trim().split(LINE_SEPARATOR);
-        return new ImmutablePair<>(splitArray[0], splitArray[1]);
+        int index = line.lastIndexOf(LINE_SEPARATOR);
+        String lineNum = line.substring(0, index);
+        String content = line.substring(index + 1, line.length());
+        return new ImmutablePair<>(lineNum, content);
     }
+
+//    public static void main(String[] args) {
+//        String a = "100@{\"index\":1,\"name\":\"default\",\"content\":\"打豆豆\",\"last\":true,\"done\":false}";
+//        String[] split = a.split("@");
+//        int i = a.lastIndexOf("@");
+//        System.out.println(i);
+//        System.out.println(JSON.toJSONString(split));
+//    }
 
     /**
      * 转换并加载到内存中
@@ -82,7 +91,6 @@ public class FileRepository implements IRepository<TodoEntity> {
         List<TodoEntity> originTodoList = new ArrayList<>();
         todoFileList.stream().forEach(line -> {
             Pair<String, String> linePair = splitLine(line);
-            System.out.println(linePair);
             // 反序列化
             TodoEntity todoEntity = new TodoEntity();
             todoEntity.deSerialize(linePair.getRight());
@@ -93,7 +101,7 @@ public class FileRepository implements IRepository<TodoEntity> {
         originTodoList.stream().forEach(todoEntity -> {
             String username = todoEntity.getName();
 
-            Map<String, List<TodoEntity>> todoMap = todoContext.getTodoMap();
+            Map<String, List<TodoEntity>> todoMap = TodoContext.getTodoMap();
 
             if (todoMap.keySet().contains(username)) {
                 // 若已包含该用户，则直接追加

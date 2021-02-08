@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author snowalker
@@ -27,7 +28,7 @@ public class AddCmdExecutor implements CommandExecutor {
     }
 
     @Override
-    public void execute(String user, Object extra) {
+    public void execute(String user, Object extra, CountDownLatch countDownLatch) {
         user = todoContext.checkUser(user);
         if (extra == null) {
             return;
@@ -71,14 +72,14 @@ public class AddCmdExecutor implements CommandExecutor {
         int lastLineNum = RepositoryDelegator.getInstance().lastLine();
 
         // 异步写文件
-        asyncAppendTodo(persistTodo, ++lastLineNum);
+        asyncAppendTodo(persistTodo, ++lastLineNum, countDownLatch);
     }
 
-    private void asyncAppendTodo(TodoEntity persistTodo, int lineNum) {
-        TodoEntity finalPersistTodo = persistTodo;
+    private void asyncAppendTodo(TodoEntity persistTodo, int lineNum, CountDownLatch countDownLatch) {
         ThreadPoolHolder.getInstance().getFileProcessThreadPool()
                 .execute(() -> {
                     RepositoryDelegator.getInstance().append(persistTodo, lineNum);
+                    countDownLatch.countDown();
                 });
     }
 

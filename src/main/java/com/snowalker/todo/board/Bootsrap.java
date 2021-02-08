@@ -10,6 +10,7 @@ import com.snowalker.todo.board.infrastructure.repository.RepositoryDelegator;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 public class Bootsrap {
 
@@ -41,7 +42,6 @@ public class Bootsrap {
 
             // 具体处理逻辑
             commandInputHandler.parseCommand(originCommand);
-            Logger.debug(JSON.toJSONString(TodoContext.getTodoMap()));
         }
     }
 

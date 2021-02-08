@@ -8,6 +8,7 @@ import com.snowalker.todo.board.infrastructure.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.stream.Collectors;
 
 /**
@@ -26,7 +27,7 @@ public class ListCmdExecutor implements CommandExecutor {
     }
 
     @Override
-    public void execute(String user, Object extra) {
+    public void execute(String user, Object extra, CountDownLatch countDownLatch) {
         user = todoContext.checkUser(user);
         if (extra == null) {
             return;
@@ -87,7 +88,11 @@ public class ListCmdExecutor implements CommandExecutor {
         // 完成的todo数量
         long doneCount = todoEntities.stream().filter(todoItem -> todoItem.isDone()).count();
         todoEntities.stream().forEach(todo -> {
-            System.out.println(todo.getIndex() + ". <" + todo.getContent() + ">");
+            if (todo.isDone()) {
+                System.out.println(todo.getIndex() + ".  [Done] <" + todo.getContent() + ">");
+            } else {
+                System.out.println(todo.getIndex() + ". <" + todo.getContent() + ">");
+            }
         });
         System.out.println("");
         System.out.println("Total: " + total + " items, " + doneCount + " items done.");

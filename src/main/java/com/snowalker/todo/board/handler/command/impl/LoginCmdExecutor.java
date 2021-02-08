@@ -4,6 +4,8 @@ import com.snowalker.todo.board.handler.command.CommandExecutor;
 import com.snowalker.todo.board.handler.command.constant.CommandTokenConstant;
 import com.snowalker.todo.board.domain.TodoContext;
 
+import java.util.concurrent.CountDownLatch;
+
 /**
  * @author snowalker
  * @version 1.0
@@ -20,8 +22,7 @@ public class LoginCmdExecutor implements CommandExecutor {
     }
 
     @Override
-    public void execute(String user, Object extra) {
-
+    public void execute(String user, Object extra, CountDownLatch countDownLatch) {
     }
 
     @Override

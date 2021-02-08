@@ -10,6 +10,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author snowalker
@@ -27,7 +28,7 @@ public class DoneCmdExecutor implements CommandExecutor {
     }
 
     @Override
-    public void execute(String user, Object extra) {
+    public void execute(String user, Object extra, CountDownLatch countDownLatch) {
         user = todoContext.checkUser(user);
         if (extra == null) {
             return;
@@ -60,6 +61,7 @@ public class DoneCmdExecutor implements CommandExecutor {
 
         printTodoItem(todoEntity);
         // todo  持久化
+
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.snowalker.todo.board.handler.command;
 
+import java.util.concurrent.CountDownLatch;
+
 /**
  * @author snowalker
  * @version 1.0
@@ -11,10 +13,11 @@ public interface CommandExecutor {
 
     /**
      * 处理逻辑
-     * @param extra
      * @param user
+     * @param extra
+     * @param countDownLatch
      */
-    void execute(String user, Object extra);
+    void execute(String user, Object extra, CountDownLatch countDownLatch);
 
     /**
      * 命令类别
