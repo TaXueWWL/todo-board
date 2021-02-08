@@ -72,8 +72,6 @@ public class AddCmdExecutor implements CommandExecutor {
             printTodoItem(newTodo);
         }
 
-
-
         // 异步写文件
         asyncAppendTodo(persistTodo, currentLineNum, countDownLatch);
     }

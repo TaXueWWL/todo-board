@@ -5,6 +5,7 @@ import com.snowalker.todo.board.handler.command.constant.CommandTokenConstant;
 import com.snowalker.todo.board.domain.TodoContext;
 import com.snowalker.todo.board.domain.TodoEntity;
 import com.snowalker.todo.board.infrastructure.logger.Logger;
+import com.snowalker.todo.board.infrastructure.repository.RepositoryDelegator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -61,7 +62,16 @@ public class DoneCmdExecutor implements CommandExecutor {
 
         printTodoItem(todoEntity);
         // todo  持久化
+        sync2File(todoEntity);
+    }
 
+    /**
+     * 同步到文件
+     * @param todoEntity
+     */
+    private void sync2File(TodoEntity todoEntity) {
+        // 暂时通过同步实现，后续考虑采用异步，但是实际上异步操作还得同步，索性直接同步得了
+        RepositoryDelegator.getInstance().update(todoEntity);
     }
 
     /**

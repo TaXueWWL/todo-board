@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
+import com.snowalker.todo.board.infrastructure.repository.impl.FileRepository;
 
 import java.io.IOException;
 
@@ -92,6 +93,17 @@ public class TodoEntity {
         } catch (IOException e) {
             throw new RuntimeException("deSerialize error.", e);
         }
+    }
+
+    /**
+     * 序列化为文件内容
+     * @return
+     */
+    public String serialize2FileContent() {
+        return new StringBuilder()
+                .append(this.getGlobalIndex())
+                .append(FileRepository.LINE_SEPARATOR)
+                .append(this.serialize()).toString();
     }
 
     public int getGlobalIndex() {

@@ -22,14 +22,44 @@ import java.util.Map;
  * @createTime: 2021-02-08 11:12
  * @ClassName: FileRepository
  * @description: 文件存储
+ * https://blog.csdn.net/quyuquan2014/article/details/82784408
+ * FileWriter:
+ *  创建一个FileWriter 对象，该对象一被初始化就需要要明确被操纵文件
+ *  该文件会被创建到指定目录下，如果该目录下已有了同名文件的话，则会被覆盖。
+ *  其实该步就是在明确数据要存放在的目的地
+ *  FileWriter fw=new FileWriter("quyuquan1111.txt");
+ *
+ *  调用write方法，将字符串写入到流中。
+ *  fw.write("恩赐");
+ *
+ *  刷新流对象中的缓冲中的数据 将数据刷到目的地中
+ *  fw.flush
+ *
+ *  关闭流资源，但是关闭之前会刷新一次内部的缓冲中的数据。
+ *  将数据刷到目的地中去，和flush区别：flush 刷新后，流可以继续使用，close刷新后，会将流关闭。
+ *  fw.close();
  */
 public class FileRepository implements IRepository<TodoEntity> {
 
     /**行号分隔符，通过.区分行号与后面的内容*/
-    private static final String LINE_SEPARATOR = ".";
+    public static final String LINE_SEPARATOR = ".";
 
     private String absoluteTodoFilePath = ConfigReader.getInstance().getConfig("repository.file.root_path") +
             ConfigReader.getInstance().getConfig("repository.file.name");
+
+    /**flush后可继续使用*/
+    private FileWriter fileWriter;
+
+    private FileWriter overwriteFileWriter;
+
+    public FileRepository() {
+//        try {
+//            this.fileWriter = new FileWriter(absoluteTodoFilePath, true);
+//            this.overwriteFileWriter = new FileWriter(absoluteTodoFilePath, false);
+//        } catch (IOException e) {
+//            throw new TodoRuntimeException("初始化FileRepository异常!,加载fileWriter失败.", e);
+//        }
+    }
 
     /**
      * 启动时加载，将现有的内容装载到内存中
@@ -70,14 +100,6 @@ public class FileRepository implements IRepository<TodoEntity> {
         String content = line.substring(index + 1, line.length());
         return new ImmutablePair<>(lineNum, content);
     }
-
-//    public static void main(String[] args) {
-//        String a = "100@{\"index\":1,\"name\":\"default\",\"content\":\"打豆豆\",\"last\":true,\"done\":false}";
-//        String[] split = a.split("@");
-//        int i = a.lastIndexOf("@");
-//        System.out.println(i);
-//        System.out.println(JSON.toJSONString(split));
-//    }
 
     /**
      * 转换并加载到内存中
@@ -149,24 +171,89 @@ public class FileRepository implements IRepository<TodoEntity> {
      */
     @Override
     public void append(TodoEntity todoEntity, int lineNum) {
-        String fileName = absoluteTodoFilePath;
-
         synchronized (FileRepository.class) {
             try {
-                FileWriter fileWriter = new FileWriter(fileName, true);
+                FileWriter fileWriter = new FileWriter(absoluteTodoFilePath, true);
                 String content = new StringBuilder().append(lineNum).append(LINE_SEPARATOR).append(todoEntity.serialize()).toString();
-                System.out.println(content);
                 fileWriter.write(content + "\r\n");
+                fileWriter.flush();
                 fileWriter.close();
+                System.out.println(content);
             } catch (Exception e) {
                 Logger.error("FileRepository.append追加写入todoEntity异常!");
             }
         }
     }
 
+    /**
+     * 读取到指定位置
+     * 替换当前位置  并将前后的内容刷回文件
+     * @param todoEntity
+     * @return
+     */
     @Override
     public boolean update(TodoEntity todoEntity) {
-        return false;
+
+        // 取出全局行号，找到该行 进行替换操作，重新写回文件
+        int globalIndex = todoEntity.getGlobalIndex();
+        Logger.debug("update:" + JSON.toJSONString(todoEntity));
+        List<String> fileContentList = new ArrayList<>();
+
+        LineNumberReader lineNumberReader = null;
+        try {
+            //构造LineNumberReader实例
+            lineNumberReader = new LineNumberReader(new FileReader(absoluteTodoFilePath));
+
+            String line = null;
+            while ((line = lineNumberReader.readLine()) != null) {
+                System.out.println("Line " + lineNumberReader.getLineNumber() +  ": " + line);
+                if (lineNumberReader.getLineNumber() == globalIndex) {
+                    // 目标行，替换该行拼并写入
+                    String newLine = todoEntity.serialize2FileContent();
+                    fileContentList.add(newLine);
+                } else {
+                    // 非目标行直接添加
+                    fileContentList.add(line);
+                }
+            }
+        } catch (Exception e) {
+            throw new TodoRuntimeException("按行读取失败!");
+        } finally {
+            //关闭lineNumberReader
+            try {
+                if (lineNumberReader != null) {
+                    lineNumberReader.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        // 重新写入文件
+        overwriteFile(fileContentList);
+        return true;
+    }
+
+    /**
+     * 覆盖写文件
+     * @param fileContentList
+     */
+    private void overwriteFile(List<String> fileContentList) {
+
+        try {
+            FileWriter overwriteFileWriter = new FileWriter(absoluteTodoFilePath, false);
+            fileContentList.stream().forEach(line -> {
+                try {
+                    overwriteFileWriter.write(line + "\r\n");
+                    overwriteFileWriter.flush();
+                } catch (IOException e) {
+                    throw new TodoRuntimeException("覆盖写文件失败!", e);
+                }
+            });
+            overwriteFileWriter.close();
+        } catch (Exception e) {
+            throw new TodoRuntimeException("overwriteFile异常!", e);
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.snowalker.todo.board.handler.command;
 
 import com.google.common.collect.Maps;
+import com.snowalker.todo.board.domain.exception.TodoRuntimeException;
 import com.snowalker.todo.board.handler.command.constant.CommandTokenConstant;
 import com.snowalker.todo.board.handler.command.impl.*;
 import com.snowalker.todo.board.domain.TodoContext;
@@ -57,7 +58,7 @@ public class CommandExecutorAdaptor {
             try {
                 countDownLatch.await();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new TodoRuntimeException("countDownLatch.await() error!", e);
             }
         } else {
             COMMAND_EXECUTOR_CONTEXT.get(commandType).execute(user, extra, countDownLatch);
