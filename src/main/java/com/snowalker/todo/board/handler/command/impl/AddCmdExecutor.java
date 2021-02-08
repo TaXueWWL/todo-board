@@ -46,9 +46,13 @@ public class AddCmdExecutor implements CommandExecutor {
         // 获取当前最后一个Todo
         TodoEntity lastTodoEntity = todoContext.getLastTodoEntity(user);
 
+        // 获取文件最后一行
+        int lastLineNum = RepositoryDelegator.getInstance().lastLine();
+        int currentLineNum = ++lastLineNum;
+
         if (!lastTodoEntity.isLast()) {
             // 不存在已有的todo 则当前是第一个
-            lastTodoEntity.setName(user).setIndex(1).setContent(extraParam).setLast();
+            lastTodoEntity.setName(user).setIndex(1).setGlobalIndex(currentLineNum).setContent(extraParam).setLast();
             this.todoContext.addTodoItem(user, lastTodoEntity);
             // 赋值持久化Todo实体
             persistTodo = lastTodoEntity;
@@ -60,7 +64,7 @@ public class AddCmdExecutor implements CommandExecutor {
             int newIndex = index + 1;
             lastTodoEntity.setNotLast();
             // 创建一个新的todo
-            TodoEntity newTodo = new TodoEntity(user, newIndex, extraParam, true);
+            TodoEntity newTodo = new TodoEntity(user, newIndex, currentLineNum, extraParam, true);
             this.todoContext.addTodoItem(user, newTodo);
             // 赋值持久化Todo实体
             persistTodo = newTodo;
@@ -68,11 +72,10 @@ public class AddCmdExecutor implements CommandExecutor {
             printTodoItem(newTodo);
         }
 
-        // 获取文件最后一行
-        int lastLineNum = RepositoryDelegator.getInstance().lastLine();
+
 
         // 异步写文件
-        asyncAppendTodo(persistTodo, ++lastLineNum, countDownLatch);
+        asyncAppendTodo(persistTodo, currentLineNum, countDownLatch);
     }
 
     private void asyncAppendTodo(TodoEntity persistTodo, int lineNum, CountDownLatch countDownLatch) {

@@ -27,16 +27,20 @@ public class TodoEntity {
     /**是否完成，默认false 未完成*/
     private boolean done = false;
 
+    /**全局index*/
+    private int globalIndex;
+
     public TodoEntity() {
     }
 
-    public TodoEntity(String name, int index, String content, boolean last) {
-        this(name, index, content, last, false);
+    public TodoEntity(String name, int index, int globalIndex, String content, boolean last) {
+        this(name, index, globalIndex, content, last, false);
     }
 
-    public TodoEntity(String name, int index, String content, boolean last, boolean done) {
+    public TodoEntity(String name, int index, int globalIndex, String content, boolean last, boolean done) {
         this.name = name;
         this.index = index;
+        this.globalIndex = globalIndex;
         this.content = content;
         this.last = last;
         this.done = done;
@@ -57,6 +61,7 @@ public class TodoEntity {
                 .put("content", this.getContent())
                 .put("last", this.last)
                 .put("done", this.done)
+                .put("globalIndex", this.getGlobalIndex())
                 .build();
         ObjectMapper objectMapper = new ObjectMapper();
         // 返回序列化消息Json串
@@ -83,9 +88,19 @@ public class TodoEntity {
             this.setContent(jsonNode.get("content").asText());
             this.setLast(jsonNode.get("last").asBoolean());
             this.setDone(jsonNode.get("done").asBoolean());
+            this.setGlobalIndex(jsonNode.get("globalIndex").asInt());
         } catch (IOException e) {
             throw new RuntimeException("deSerialize error.", e);
         }
+    }
+
+    public int getGlobalIndex() {
+        return globalIndex;
+    }
+
+    public TodoEntity setGlobalIndex(int globalIndex) {
+        this.globalIndex = globalIndex;
+        return this;
     }
 
     /**
