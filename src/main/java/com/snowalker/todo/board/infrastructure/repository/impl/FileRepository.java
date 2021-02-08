@@ -173,7 +173,9 @@ public class FileRepository implements IRepository<TodoEntity> {
     public void append(TodoEntity todoEntity, int lineNum) {
         synchronized (FileRepository.class) {
             try {
-                FileWriter fileWriter = new FileWriter(absoluteTodoFilePath, true);
+//                FileWriter fileWriter = new FileWriter(absoluteTodoFilePath, true);
+                // 通过这个方式解决中文乱码问题
+                BufferedWriter fileWriter = new BufferedWriter (new OutputStreamWriter (new FileOutputStream (absoluteTodoFilePath,true),"UTF-8"));
                 String content = new StringBuilder().append(lineNum).append(LINE_SEPARATOR).append(todoEntity.serialize()).toString();
                 fileWriter.write(content + "\r\n");
                 fileWriter.flush();
@@ -239,7 +241,9 @@ public class FileRepository implements IRepository<TodoEntity> {
     private void overwriteFile(List<String> fileContentList) {
 
         try {
-            FileWriter overwriteFileWriter = new FileWriter(absoluteTodoFilePath, false);
+//            FileWriter overwriteFileWriter = new FileWriter(absoluteTodoFilePath, false);
+            BufferedWriter overwriteFileWriter = new BufferedWriter (new OutputStreamWriter (new FileOutputStream (absoluteTodoFilePath,false),"UTF-8"));
+
             fileContentList.stream().forEach(line -> {
                 try {
                     overwriteFileWriter.write(line + "\r\n");

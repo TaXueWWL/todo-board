@@ -33,6 +33,7 @@ public class Bootsrap {
             String originCommand = commandInputHandler.nextCommand();
             if (StringUtils.isBlank(originCommand) || originCommand.equals(CommandTokenConstant.EXIT)) {
                 System.out.println("exit!");
+                System.exit(0);
                 break;
             }
 

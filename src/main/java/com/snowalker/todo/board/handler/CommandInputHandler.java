@@ -38,17 +38,17 @@ public class CommandInputHandler {
 
     public void initCommandHelpTable() {
         COMMAND_HELP_MENU.add("");
-        COMMAND_HELP_MENU.add("* [支持的命令:]                                                       *");
-        COMMAND_HELP_MENU.add("* 添加 Todo 项                                 todo add <item>        *");
-        COMMAND_HELP_MENU.add("* 完成 Todo 项                                 todo done <itemIndex>  *");
-        COMMAND_HELP_MENU.add("* 查看 Todo 列表,缺省情况下只列出未完成的Todo项     todo list              *");
-        COMMAND_HELP_MENU.add("* 使用 all 参数,查看所有的Todo项                 todo list --all        *");
-        COMMAND_HELP_MENU.add("* 用户登录                                     todo login -u user     *");
-        COMMAND_HELP_MENU.add("* 用户退出                                     todo logout            *");
-        COMMAND_HELP_MENU.add("* Todo 列表导出                                todo export > todolist *");
-        COMMAND_HELP_MENU.add("* Todo 列表导入                                todo import -f todolist*");
-        COMMAND_HELP_MENU.add("* 初始化数据库                                  todo init              *");
-        COMMAND_HELP_MENU.add("* 退出命令行                                    exit                   *");
+        COMMAND_HELP_MENU.add(String.format("%-48s", "* [支持的命令:]") + String.format("%-58s", "|                          *"));
+        COMMAND_HELP_MENU.add(String.format("%-50s", "* 添加Todo项") +  String.format("%-40s", "|  todo add <item>         *"));
+        COMMAND_HELP_MENU.add(String.format("%-50s", "* 完成Todo项") +  String.format("%-40s", "|  todo done <itemIndex>   *"));
+        COMMAND_HELP_MENU.add(String.format("%-38s", "* 查看Todo列表,缺省情况下只列出未完成的Todo项") + String.format("%-40s", "|  todo list               *"));
+        COMMAND_HELP_MENU.add(String.format("%-44s", "* 使用all参数,查看所有的Todo项") + String.format("%-40s", "|  todo list --all         *"));
+        COMMAND_HELP_MENU.add(String.format("%-49s", "* 用户登录") + String.format("%-40s", "|  todo login -u user      *"));
+        COMMAND_HELP_MENU.add(String.format("%-49s", "* 用户退出") + String.format("%-40s", "|  todo logout             *"));
+        COMMAND_HELP_MENU.add(String.format("%-49s", "* Todo列表导出") + String.format("%-40s", "|  todo export > todolist  *"));
+        COMMAND_HELP_MENU.add(String.format("%-49s", "* Todo列表导入") + String.format("%-40s", "|  todo import -f todolist *"));
+        COMMAND_HELP_MENU.add(String.format("%-47s", "* 初始化数据库") + String.format("%-40s", "|  todo init               *"));
+        COMMAND_HELP_MENU.add(String.format("%-48s", "* 退出命令行") + String.format("%-40s", "|  exit                    *"));
         COMMAND_HELP_MENU.add("");
     }
 

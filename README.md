@@ -4,6 +4,57 @@
 
 # 编译方法
 
+## 使用maven-assembly打包
+[maven项目如何打包成jar以便通过java -jar执行](https://blog.csdn.net/u013905744/article/details/81285002)
+1. POM文件添加maven-compiler-plugin以及maven-assembly-plugin，注意在maven-assembly-plugin中要指定mainClass，这样可以避免java –jar 时报找不到主类异常。
+2. 在intelliij idea的项目terminal中执行mvn compile assembly:single
+
+    
+      <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.5.1</version>
+            <configuration>
+              <source>${java.version}</source>
+              <target>${java.version}</target>
+              <showWarnings>true</showWarnings>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>cn.hfi.App</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+
+## 中文乱码
+
+        // 存在乱码问题
+        FileWriter fileWriter = new FileWriter(absoluteTodoFilePath, true);
+
+通过BufferedWriter指定写入的编码        
+        
+        // 通过这个方式解决中文乱码问题
+        BufferedWriter fileWriter = 
+            new BufferedWriter (
+                    new OutputStreamWriter (
+                            new FileOutputStream (absoluteTodoFilePath,true),"UTF-8"));
+
+[Java FileWriter无法编码utf-8 转换方法](https://blog.csdn.net/liyuxing6639801/article/details/69487712)
 # 功能模块
 
 # 主流程图
