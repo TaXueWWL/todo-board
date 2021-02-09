@@ -2,17 +2,17 @@
 
 > 极客时间“代码之丑”开头作业
 
-# 内容简介
+## 内容简介
 
 [内容介绍](mission.md)
 
-# 编译方法
+## 编译方法
 
 1. clone代码，导入IDEA等工具中
 2. 编辑 **src/main/resources/app.properties**，修改 **repository.file.root_path** 为你的本地路径
 3. 运行 **com.snowalker.todo.board.Bootsrap**
 
-## 使用maven-assembly打包
+### 使用maven-assembly打包
 
 [maven项目如何打包成jar以便通过java -jar执行](https://blog.csdn.net/u013905744/article/details/81285002)
 1. POM文件添加 **maven-compiler-plugin** 以及 **maven-assembly-plugin**，注意在 **maven-assembly-plugin** 中要指定mainClass，
@@ -51,7 +51,7 @@
         </plugins>
       </build>
 
-## 中文乱码
+### 中文乱码
 
         // 存在乱码问题
         FileWriter fileWriter = new FileWriter(absoluteTodoFilePath, true);
@@ -65,15 +65,15 @@
                             new FileOutputStream (absoluteTodoFilePath,true),"UTF-8"));
 
 [Java FileWriter无法编码utf-8 转换方法](https://blog.csdn.net/liyuxing6639801/article/details/69487712)
-# 功能模块
+## 功能模块
 
-# 主流程图
+## 主流程图
 
-# 类图
+## 类图
 ![主要类图](class-construct.png)
 [IDEA 生成类图的方法](https://www.pianshen.com/article/83981334809/)
 
-# 优化思路
+## 优化思路
 1. 基于IOC框架如：Spring、Guice等进行重构
 2. 写文件优化为NIO
 
