@@ -61,7 +61,7 @@ public class CommandExecutorAdaptor {
                 throw new TodoRuntimeException("countDownLatch.await() error!", e);
             }
         } else {
-            COMMAND_EXECUTOR_CONTEXT.get(commandType).execute(user, extra, countDownLatch);
+            COMMAND_EXECUTOR_CONTEXT.get(commandType).execute(user, extra, null);
         }
     }
 
