@@ -36,6 +36,14 @@ public class CommandInputHandler {
         initCommandExecutorAdaptor();
     }
 
+    public CommandInputHandler() {
+        this.scanner = new Scanner(System.in);
+        // 初始化帮助菜单
+        initCommandHelpTable();
+        // 初始化命令执行适配器
+        initCommandExecutorAdaptor();
+    }
+
     public void initCommandHelpTable() {
         COMMAND_HELP_MENU.add("");
         COMMAND_HELP_MENU.add(String.format("%-48s", "* [支持的命令:]") + String.format("%-58s", "|                          *"));

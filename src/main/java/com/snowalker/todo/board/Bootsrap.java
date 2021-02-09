@@ -18,16 +18,14 @@ public class Bootsrap {
         // 前置处理 资源预载
         PreProcess();
 
-        Scanner scanner = new Scanner(System.in);
-        CommandInputHandler commandInputHandler = new CommandInputHandler(scanner);
-
         // 输出提示
         Logger.printBanner("================== Welcome to use [todo board] ======================");
+
+        CommandInputHandler commandInputHandler = new CommandInputHandler();
         commandInputHandler.printHelpMenu();
 
         while (true) {
             Logger.printBanner("");
-
             // 接收命令并解析执行
             Logger.printTips(">>> ");
             String originCommand = commandInputHandler.nextCommand();
