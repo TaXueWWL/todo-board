@@ -66,13 +66,13 @@
 
 [Java FileWriter无法编码utf-8 转换方法](https://blog.csdn.net/liyuxing6639801/article/details/69487712)
 ## 功能模块
+> 包结构如下
 
-
-
+![主要类图](bin/package-structure.png)
 ## 主流程图
 
 ## 类图
-![主要类图](class-construct.png)
+![主要类图](bin/class-construct.png)
 [IDEA 生成类图的方法](https://www.pianshen.com/article/83981334809/)
 
 ## 优化思路
