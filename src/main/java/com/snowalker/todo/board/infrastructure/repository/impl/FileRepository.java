@@ -177,7 +177,9 @@ public class FileRepository implements IRepository<TodoEntity> {
                 // 通过这个方式解决中文乱码问题
                 BufferedWriter fileWriter = new BufferedWriter (new OutputStreamWriter (new FileOutputStream (absoluteTodoFilePath,true),"UTF-8"));
                 String content = new StringBuilder().append(lineNum).append(LINE_SEPARATOR).append(todoEntity.serialize()).toString();
-                fileWriter.write(content + "\r\n");
+                fileWriter.write(content);
+                // 输出平台特定换行符
+                fileWriter.newLine();
                 fileWriter.flush();
                 fileWriter.close();
                 System.out.println(content);
@@ -246,7 +248,9 @@ public class FileRepository implements IRepository<TodoEntity> {
 
             fileContentList.stream().forEach(line -> {
                 try {
-                    overwriteFileWriter.write(line + "\r\n");
+                    overwriteFileWriter.write(line);
+                    // 输出平台特定换行符
+                    overwriteFileWriter.newLine();
                     overwriteFileWriter.flush();
                 } catch (IOException e) {
                     throw new TodoRuntimeException("覆盖写文件失败!", e);
