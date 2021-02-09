@@ -4,7 +4,7 @@
 
 ## 内容简介
 
-[内容介绍](mission.md)
+[内容介绍](bin/mission.md)
 
 ## 编译方法
 
