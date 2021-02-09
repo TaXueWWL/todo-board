@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
-import com.snowalker.todo.board.infrastructure.repository.impl.FileRepository;
+import com.snowalker.todo.board.domain.repository.impl.FileRepository;
 
 import java.io.IOException;
 

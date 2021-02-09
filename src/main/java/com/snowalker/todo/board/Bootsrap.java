@@ -4,7 +4,7 @@ import com.snowalker.todo.board.application.command.constant.CommandTokenConstan
 import com.snowalker.todo.board.application.CommandInputHandler;
 import com.snowalker.todo.board.infrastructure.config.ConfigReader;
 import com.snowalker.todo.board.infrastructure.logger.Logger;
-import com.snowalker.todo.board.infrastructure.repository.RepositoryDelegator;
+import com.snowalker.todo.board.domain.repository.RepositoryDelegator;
 import org.apache.commons.lang3.StringUtils;
 
 public class Bootsrap {

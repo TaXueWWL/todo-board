@@ -1,7 +1,7 @@
-package com.snowalker.todo.board.infrastructure.repository.impl;
+package com.snowalker.todo.board.domain.repository.impl;
 
 import com.snowalker.todo.board.domain.TodoEntity;
-import com.snowalker.todo.board.infrastructure.repository.IRepository;
+import com.snowalker.todo.board.domain.repository.IRepository;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.snowalker.todo.board.infrastructure.repository;
+package com.snowalker.todo.board.domain.repository;
 
 import java.util.List;
 

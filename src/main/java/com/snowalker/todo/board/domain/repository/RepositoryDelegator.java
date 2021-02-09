@@ -1,11 +1,11 @@
-package com.snowalker.todo.board.infrastructure.repository;
+package com.snowalker.todo.board.domain.repository;
 
 import com.snowalker.todo.board.domain.TodoEntity;
 import com.snowalker.todo.board.infrastructure.exception.TodoRuntimeException;
 import com.snowalker.todo.board.infrastructure.exception.UnSupportRepositoryException;
 import com.snowalker.todo.board.infrastructure.config.ConfigReader;
-import com.snowalker.todo.board.infrastructure.repository.impl.DatabaseRepository;
-import com.snowalker.todo.board.infrastructure.repository.impl.FileRepository;
+import com.snowalker.todo.board.domain.repository.impl.DatabaseRepository;
+import com.snowalker.todo.board.domain.repository.impl.FileRepository;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;

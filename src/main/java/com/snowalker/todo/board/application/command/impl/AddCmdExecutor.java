@@ -4,7 +4,7 @@ import com.snowalker.todo.board.application.command.CommandExecutor;
 import com.snowalker.todo.board.application.command.constant.CommandTokenConstant;
 import com.snowalker.todo.board.domain.TodoContext;
 import com.snowalker.todo.board.domain.TodoEntity;
-import com.snowalker.todo.board.infrastructure.repository.RepositoryDelegator;
+import com.snowalker.todo.board.domain.repository.RepositoryDelegator;
 import com.snowalker.todo.board.infrastructure.threadpool.ThreadPoolHolder;
 import org.apache.commons.lang3.StringUtils;
 

@@ -1,4 +1,4 @@
-package com.snowalker.todo.board.infrastructure.repository.impl;
+package com.snowalker.todo.board.domain.repository.impl;
 
 import com.snowalker.todo.board.domain.TodoContext;
 import com.snowalker.todo.board.domain.TodoEntity;
@@ -6,7 +6,7 @@ import com.snowalker.todo.board.infrastructure.exception.TodoRuntimeException;
 import com.snowalker.todo.board.infrastructure.config.ConfigReader;
 import com.snowalker.todo.board.infrastructure.file.FileHandler;
 import com.snowalker.todo.board.infrastructure.logger.Logger;
-import com.snowalker.todo.board.infrastructure.repository.IRepository;
+import com.snowalker.todo.board.domain.repository.IRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;

@@ -5,7 +5,7 @@ import com.snowalker.todo.board.application.command.constant.CommandTokenConstan
 import com.snowalker.todo.board.domain.TodoContext;
 import com.snowalker.todo.board.domain.TodoEntity;
 import com.snowalker.todo.board.infrastructure.logger.Logger;
-import com.snowalker.todo.board.infrastructure.repository.RepositoryDelegator;
+import com.snowalker.todo.board.domain.repository.RepositoryDelegator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
