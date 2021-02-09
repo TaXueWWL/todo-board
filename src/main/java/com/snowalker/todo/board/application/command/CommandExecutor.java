@@ -1,5 +1,7 @@
 package com.snowalker.todo.board.application.command;
 
+import com.snowalker.todo.board.domain.TodoContext;
+
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -24,4 +26,10 @@ public interface CommandExecutor {
      * @return
      */
     String commandType();
+
+    /**
+     * 写入todoContext
+     * @param todoContext
+     */
+    void putTodoContext(TodoContext todoContext);
 }

@@ -23,10 +23,6 @@ public class AddCmdExecutor implements CommandExecutor {
 
     private TodoContext todoContext;
 
-    public AddCmdExecutor(TodoContext todoContext) {
-        this.todoContext = todoContext;
-    }
-
     @Override
     public void execute(String user, Object extra, CountDownLatch countDownLatch) {
         user = todoContext.checkUser(user);
@@ -92,5 +88,10 @@ public class AddCmdExecutor implements CommandExecutor {
     @Override
     public String commandType() {
         return CommandTokenConstant.ADD;
+    }
+
+    @Override
+    public void putTodoContext(TodoContext todoContext) {
+        this.todoContext = todoContext;
     }
 }

@@ -22,10 +22,6 @@ public class ListCmdExecutor implements CommandExecutor {
 
     private TodoContext todoContext;
 
-    public ListCmdExecutor(TodoContext todoContext) {
-        this.todoContext = todoContext;
-    }
-
     @Override
     public void execute(String user, Object extra, CountDownLatch countDownLatch) {
         user = todoContext.checkUser(user);
@@ -114,5 +110,10 @@ public class ListCmdExecutor implements CommandExecutor {
     @Override
     public String commandType() {
         return CommandTokenConstant.LIST;
+    }
+
+    @Override
+    public void putTodoContext(TodoContext todoContext) {
+        this.todoContext = todoContext;
     }
 }

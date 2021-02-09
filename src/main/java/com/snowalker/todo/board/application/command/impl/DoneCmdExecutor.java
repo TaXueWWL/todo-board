@@ -24,10 +24,6 @@ public class DoneCmdExecutor implements CommandExecutor {
 
     private TodoContext todoContext;
 
-    public DoneCmdExecutor(TodoContext todoContext) {
-        this.todoContext = todoContext;
-    }
-
     @Override
     public void execute(String user, Object extra, CountDownLatch countDownLatch) {
         user = todoContext.checkUser(user);
@@ -85,5 +81,10 @@ public class DoneCmdExecutor implements CommandExecutor {
     @Override
     public String commandType() {
         return CommandTokenConstant.DONE;
+    }
+
+    @Override
+    public void putTodoContext(TodoContext todoContext) {
+        this.todoContext = todoContext;
     }
 }

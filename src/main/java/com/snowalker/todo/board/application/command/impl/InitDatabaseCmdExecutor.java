@@ -17,10 +17,6 @@ public class InitDatabaseCmdExecutor implements CommandExecutor {
 
     private TodoContext todoContext;
 
-    public InitDatabaseCmdExecutor(TodoContext todoContext) {
-        this.todoContext = todoContext;
-    }
-
     @Override
     public void execute(String user, Object extra, CountDownLatch countDownLatch) {
     }
@@ -28,5 +24,10 @@ public class InitDatabaseCmdExecutor implements CommandExecutor {
     @Override
     public String commandType() {
         return CommandTokenConstant.INIT;
+    }
+
+    @Override
+    public void putTodoContext(TodoContext todoContext) {
+        this.todoContext = todoContext;
     }
 }

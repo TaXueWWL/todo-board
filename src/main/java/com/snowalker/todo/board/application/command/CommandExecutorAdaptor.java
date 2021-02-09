@@ -1,15 +1,12 @@
 package com.snowalker.todo.board.application.command;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.snowalker.todo.board.application.command.constant.CommandTokenConstant;
-import com.snowalker.todo.board.application.command.impl.*;
 import com.snowalker.todo.board.domain.TodoContext;
 import com.snowalker.todo.board.infrastructure.exception.TodoRuntimeException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -25,16 +22,13 @@ public class CommandExecutorAdaptor {
 
     static {
         TodoContext todoContext = TodoContext.getInstance();
-        // 初始化具体命令执行者
-        COMMAND_EXECUTOR_CONTEXT.put(CommandTokenConstant.ADD, new AddCmdExecutor(todoContext));
-        COMMAND_EXECUTOR_CONTEXT.put(CommandTokenConstant.DONE, new DoneCmdExecutor(todoContext));
-        COMMAND_EXECUTOR_CONTEXT.put(CommandTokenConstant.LIST, new ListCmdExecutor(todoContext));
-        COMMAND_EXECUTOR_CONTEXT.put(CommandTokenConstant.LOGIN, new LoginCmdExecutor(todoContext));
-        COMMAND_EXECUTOR_CONTEXT.put(CommandTokenConstant.LOGOUT, new LogoutCmdExecutor(todoContext));
-        COMMAND_EXECUTOR_CONTEXT.put(CommandTokenConstant.EXPORT, new ExportCmdExecutor(todoContext));
-        COMMAND_EXECUTOR_CONTEXT.put(CommandTokenConstant.IMPORT, new ImportCmdExecutor(todoContext));
-        COMMAND_EXECUTOR_CONTEXT.put(CommandTokenConstant.INIT, new InitDatabaseCmdExecutor(todoContext));
-
+        // 加载命令实现到容器中
+        ServiceLoader<CommandExecutor> serviceLoaders =
+                ServiceLoader.load(CommandExecutor.class);
+        for (CommandExecutor commandExecutor : serviceLoaders) {
+            commandExecutor.putTodoContext(todoContext);
+            COMMAND_EXECUTOR_CONTEXT.put(commandExecutor.commandType(), commandExecutor);
+        }
     }
 
     /**

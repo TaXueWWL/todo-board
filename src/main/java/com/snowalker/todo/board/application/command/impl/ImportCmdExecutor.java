@@ -17,10 +17,6 @@ public class ImportCmdExecutor implements CommandExecutor {
 
     private TodoContext todoContext;
 
-    public ImportCmdExecutor(TodoContext todoContext) {
-        this.todoContext = todoContext;
-    }
-
     @Override
     public void execute(String user, Object extra, CountDownLatch countDownLatch) {
     }
@@ -28,5 +24,10 @@ public class ImportCmdExecutor implements CommandExecutor {
     @Override
     public String commandType() {
         return CommandTokenConstant.IMPORT;
+    }
+
+    @Override
+    public void putTodoContext(TodoContext todoContext) {
+        this.todoContext = todoContext;
     }
 }
