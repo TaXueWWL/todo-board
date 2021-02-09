@@ -17,9 +17,8 @@ public interface CommandExecutor {
      * 处理逻辑
      * @param user
      * @param extra
-     * @param countDownLatch
      */
-    void execute(String user, Object extra, CountDownLatch countDownLatch);
+    void execute(String user, Object extra);
 
     /**
      * 命令类别

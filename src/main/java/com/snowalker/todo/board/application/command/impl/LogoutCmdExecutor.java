@@ -18,7 +18,7 @@ public class LogoutCmdExecutor implements CommandExecutor {
     private TodoContext todoContext;
 
     @Override
-    public void execute(String user, Object extra, CountDownLatch countDownLatch) {
+    public void execute(String user, Object extra) {
     }
 
     @Override

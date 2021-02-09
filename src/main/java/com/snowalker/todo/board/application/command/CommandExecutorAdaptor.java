@@ -45,18 +45,7 @@ public class CommandExecutorAdaptor {
     }
 
     public void execute(String commandType, String user, Object extra) {
-        CountDownLatch countDownLatch = null;
-        if (needCountDownLatch(commandType)) {
-            countDownLatch = new CountDownLatch(1);
-            COMMAND_EXECUTOR_CONTEXT.get(commandType).execute(user, extra, countDownLatch);
-            try {
-                countDownLatch.await();
-            } catch (InterruptedException e) {
-                throw new TodoRuntimeException("countDownLatch.await() error!", e);
-            }
-        } else {
-            COMMAND_EXECUTOR_CONTEXT.get(commandType).execute(user, extra, null);
-        }
+        COMMAND_EXECUTOR_CONTEXT.get(commandType).execute(user, extra);
     }
 
     public boolean needCountDownLatch(String cmdKeyword) {

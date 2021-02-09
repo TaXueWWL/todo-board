@@ -25,7 +25,7 @@ public class DoneCmdExecutor implements CommandExecutor {
     private TodoContext todoContext;
 
     @Override
-    public void execute(String user, Object extra, CountDownLatch countDownLatch) {
+    public void execute(String user, Object extra) {
         user = todoContext.checkUser(user);
         if (extra == null) {
             return;

@@ -24,7 +24,7 @@ public class AddCmdExecutor implements CommandExecutor {
     private TodoContext todoContext;
 
     @Override
-    public void execute(String user, Object extra, CountDownLatch countDownLatch) {
+    public void execute(String user, Object extra) {
         user = todoContext.checkUser(user);
         if (extra == null) {
             return;
@@ -68,16 +68,17 @@ public class AddCmdExecutor implements CommandExecutor {
             printTodoItem(newTodo);
         }
 
-        // 异步写文件
-        asyncAppendTodo(persistTodo, currentLineNum, countDownLatch);
+        // 写文件
+        appendTodo(persistTodo, currentLineNum);
     }
 
-    private void asyncAppendTodo(TodoEntity persistTodo, int lineNum, CountDownLatch countDownLatch) {
-        ThreadPoolHolder.getInstance().getFileProcessThreadPool()
-                .execute(() -> {
-                    RepositoryDelegator.getInstance().append(persistTodo, lineNum);
-                    countDownLatch.countDown();
-                });
+    /**
+     * 同步写
+     * @param persistTodo
+     * @param lineNum
+     */
+    private void appendTodo(TodoEntity persistTodo, int lineNum) {
+        RepositoryDelegator.getInstance().append(persistTodo, lineNum);
     }
 
     private void printTodoItem(TodoEntity todoEntity) {
