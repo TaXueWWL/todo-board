@@ -1,8 +1,8 @@
 package com.snowalker.todo.board.infrastructure.repository;
 
 import com.snowalker.todo.board.domain.TodoEntity;
-import com.snowalker.todo.board.infrastructure.exception.TodoRuntimeException;
-import com.snowalker.todo.board.infrastructure.exception.UnSupportRepositoryException;
+import com.snowalker.todo.board.domain.exception.TodoRuntimeException;
+import com.snowalker.todo.board.domain.exception.UnSupportRepositoryException;
 import com.snowalker.todo.board.infrastructure.config.ConfigReader;
 import com.snowalker.todo.board.infrastructure.repository.impl.DatabaseRepository;
 import com.snowalker.todo.board.infrastructure.repository.impl.FileRepository;

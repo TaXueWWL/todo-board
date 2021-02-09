@@ -2,7 +2,7 @@ package com.snowalker.todo.board.domain;
 
 import com.google.common.collect.Maps;
 import com.snowalker.todo.board.infrastructure.logger.Logger;
-import com.snowalker.todo.board.infrastructure.exception.TodoRuntimeException;
+import com.snowalker.todo.board.domain.exception.TodoRuntimeException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;

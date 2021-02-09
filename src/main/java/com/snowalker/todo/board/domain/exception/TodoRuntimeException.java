@@ -1,4 +1,4 @@
-package com.snowalker.todo.board.infrastructure.exception;
+package com.snowalker.todo.board.domain.exception;
 
 /**
  * @author snowalker
