@@ -1,7 +1,7 @@
-package com.snowalker.todo.board.handler.command.impl;
+package com.snowalker.todo.board.application.command.impl;
 
-import com.snowalker.todo.board.handler.command.CommandExecutor;
-import com.snowalker.todo.board.handler.command.constant.CommandTokenConstant;
+import com.snowalker.todo.board.application.command.CommandExecutor;
+import com.snowalker.todo.board.application.command.constant.CommandTokenConstant;
 import com.snowalker.todo.board.domain.TodoContext;
 
 import java.util.concurrent.CountDownLatch;
@@ -13,11 +13,11 @@ import java.util.concurrent.CountDownLatch;
  * @className
  * @desc
  */
-public class LogoutCmdExecutor implements CommandExecutor {
+public class LoginCmdExecutor implements CommandExecutor {
 
     private TodoContext todoContext;
 
-    public LogoutCmdExecutor(TodoContext todoContext) {
+    public LoginCmdExecutor(TodoContext todoContext) {
         this.todoContext = todoContext;
     }
 
@@ -27,6 +27,6 @@ public class LogoutCmdExecutor implements CommandExecutor {
 
     @Override
     public String commandType() {
-        return CommandTokenConstant.LOGOUT;
+        return CommandTokenConstant.LOGIN;
     }
 }

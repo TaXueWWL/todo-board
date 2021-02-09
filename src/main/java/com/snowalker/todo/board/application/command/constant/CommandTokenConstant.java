@@ -1,4 +1,4 @@
-package com.snowalker.todo.board.handler.command.constant;
+package com.snowalker.todo.board.application.command.constant;
 
 /**
  * @author snowalker

@@ -1,16 +1,11 @@
 package com.snowalker.todo.board;
 
-import com.alibaba.fastjson.JSON;
-import com.snowalker.todo.board.handler.command.constant.CommandTokenConstant;
-import com.snowalker.todo.board.domain.TodoContext;
-import com.snowalker.todo.board.handler.CommandInputHandler;
+import com.snowalker.todo.board.application.command.constant.CommandTokenConstant;
+import com.snowalker.todo.board.application.CommandInputHandler;
 import com.snowalker.todo.board.infrastructure.config.ConfigReader;
 import com.snowalker.todo.board.infrastructure.logger.Logger;
 import com.snowalker.todo.board.infrastructure.repository.RepositoryDelegator;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.Scanner;
-import java.util.concurrent.CountDownLatch;
 
 public class Bootsrap {
 

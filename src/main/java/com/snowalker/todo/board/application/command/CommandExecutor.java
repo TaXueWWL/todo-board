@@ -1,4 +1,4 @@
-package com.snowalker.todo.board.handler.command;
+package com.snowalker.todo.board.application.command;
 
 import java.util.concurrent.CountDownLatch;
 

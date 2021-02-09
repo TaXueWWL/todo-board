@@ -1,16 +1,14 @@
-package com.snowalker.todo.board.handler;
+package com.snowalker.todo.board.application;
 
 import com.google.common.collect.Lists;
 import com.snowalker.todo.board.infrastructure.logger.Logger;
-import com.snowalker.todo.board.handler.command.CommandExecutorAdaptor;
-import com.snowalker.todo.board.handler.command.constant.CommandTokenConstant;
+import com.snowalker.todo.board.application.command.CommandExecutorAdaptor;
+import com.snowalker.todo.board.application.command.constant.CommandTokenConstant;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.CountDownLatch;
 
 
 /**
