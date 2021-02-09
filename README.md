@@ -72,6 +72,8 @@
 
 ![主要类图](class-construct.png)
 
+[IDEA 生成类图的方法](https://www.pianshen.com/article/83981334809/)
+
 # 优化思路
 
 1. 基于IOC框架如：Spring、Guice等进行重构
