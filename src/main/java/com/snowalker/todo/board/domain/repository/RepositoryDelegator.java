@@ -49,6 +49,9 @@ public class RepositoryDelegator implements IRepository<TodoEntity> {
         throw new UnSupportRepositoryException("不支持的持久化类型,repoType=" + repoType + ",请参考app.properties中的注释进行配置!");
     }
 
+    /**
+     * 加载资源
+     */
     @Override
     public void load() {
         select(repoType).load();

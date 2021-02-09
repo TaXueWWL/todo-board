@@ -101,7 +101,7 @@ public class CommandInputHandler {
 
         // 根据第二个token进行命令分流
         String cmdKeyword = commandTokenList.get(1);
-        // 获取其余参数
+        // 获取其余参数 涉及到后续的分发，因此需要打包
         List<String> extraParams = extraParams(commandTokenList);
 
         // 分配给具体执行器

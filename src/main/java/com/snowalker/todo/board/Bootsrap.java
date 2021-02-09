@@ -7,6 +7,12 @@ import com.snowalker.todo.board.infrastructure.logger.Logger;
 import com.snowalker.todo.board.domain.repository.RepositoryDelegator;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * @author snowalker
+ * @version 1.0
+ * @date 2021/2/7 20:21
+ * @className Bootsrap
+ */
 public class Bootsrap {
 
     public static void main(String[] args) throws Exception {
@@ -16,6 +22,7 @@ public class Bootsrap {
         // 输出提示
         Logger.printBanner("================== Welcome to use [todo board] ======================");
 
+        // 初始化一个命令处理器
         CommandInputHandler commandInputHandler = new CommandInputHandler();
         commandInputHandler.printHelpMenu();
 
