@@ -77,8 +77,7 @@ public class FileRepository implements IRepository<TodoEntity> {
             File loadFile = fileHandler.loadFile(absoluteTodoFilePath);
             // 按行读
             List<String> todoFileList = readFileByLine(loadFile);
-            // todo delete this
-            Logger.debug(todoFileList.toString());
+            Logger.debug("共加载:[" + todoFileList.size() + "]个todo项目");
             // 转换为todoEntity加载到内存中
             transfer(todoFileList);
         } catch (Exception e) {

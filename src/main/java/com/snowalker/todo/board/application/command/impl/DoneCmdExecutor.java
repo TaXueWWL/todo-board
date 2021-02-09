@@ -18,7 +18,7 @@ import java.util.concurrent.CountDownLatch;
  * @version 1.0
  * @date 2021/2/7 16:46
  * @className DoneCmdExecutor
- * @desc todo 找到某一行，直接替换，内存是修改，文件是替换
+ * @desc 找到某一行，直接替换，内存是修改，文件是替换
  */
 public class DoneCmdExecutor implements CommandExecutor {
 
@@ -61,7 +61,7 @@ public class DoneCmdExecutor implements CommandExecutor {
         todoEntity.done();
 
         printTodoItem(todoEntity);
-        // todo  持久化
+        // 持久化
         sync2File(todoEntity);
     }
 
