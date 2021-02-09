@@ -1,7 +1,7 @@
 package com.snowalker.todo.board.application.command;
 
 import com.google.common.collect.Maps;
-import com.snowalker.todo.board.domain.exception.TodoRuntimeException;
+import com.snowalker.todo.board.infrastructure.exception.TodoRuntimeException;
 import com.snowalker.todo.board.application.command.constant.CommandTokenConstant;
 import com.snowalker.todo.board.application.command.impl.*;
 import com.snowalker.todo.board.domain.TodoContext;

@@ -1,7 +1,7 @@
 package com.snowalker.todo.board.domain;
 
 import com.snowalker.todo.board.infrastructure.logger.Logger;
-import com.snowalker.todo.board.domain.exception.TodoRuntimeException;
+import com.snowalker.todo.board.infrastructure.exception.TodoRuntimeException;
 
 /**
  * @author snowalker

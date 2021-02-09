@@ -1,9 +1,8 @@
 package com.snowalker.todo.board.infrastructure.repository.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.snowalker.todo.board.domain.TodoContext;
 import com.snowalker.todo.board.domain.TodoEntity;
-import com.snowalker.todo.board.domain.exception.TodoRuntimeException;
+import com.snowalker.todo.board.infrastructure.exception.TodoRuntimeException;
 import com.snowalker.todo.board.infrastructure.config.ConfigReader;
 import com.snowalker.todo.board.infrastructure.file.FileHandler;
 import com.snowalker.todo.board.infrastructure.logger.Logger;
